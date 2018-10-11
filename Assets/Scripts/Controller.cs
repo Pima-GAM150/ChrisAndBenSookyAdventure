@@ -7,7 +7,7 @@ public class Controller : MonoBehaviour {
 
     public Transform Player;
     public BoxCollider2D Mycollidor;
-    public Rigidbody2D Ball;
+    public Rigidbody2D RigidBodyChar;
     public float speed;
     public float jumpPower = 1f;
     public Animator animator;
@@ -53,8 +53,9 @@ public class Controller : MonoBehaviour {
     	Debug.DrawRay(Player.position - offset, Vector2.down);
     	if (hit.collider != null)
             {
-            	if (hit.distance < .1f){
+            	if (hit.distance < .05f){
                 Debug.Log(hit.collider.name);
+             
                 contacts = 1;
             }
         }
@@ -71,7 +72,7 @@ public class Controller : MonoBehaviour {
             if (Input.GetButtonDown("Jump"))
             {
                 if (contacts > 0) Jump();
-                contacts = 0;
+               contacts = 0;
             }
         }
         
@@ -91,11 +92,11 @@ public class Controller : MonoBehaviour {
     void FixedUpdate()
     {
         //Controllers constant speed with velocity
-        Ball.velocity = new Vector3(buttonX * speed, Ball.velocity.y, 0f);
+        RigidBodyChar.velocity = new Vector3(buttonX * speed, RigidBodyChar.velocity.y, 0f);
     }
     void Jump()
     {
-        Ball.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
+        RigidBodyChar.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
     }
 
    // void OnCollisionEnter2D(Collision2D col)

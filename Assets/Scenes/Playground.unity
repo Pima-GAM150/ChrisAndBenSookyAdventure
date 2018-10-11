@@ -428,7 +428,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &885994921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -442,9 +442,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 885994918}
   Mycollidor: {fileID: 885994919}
-  Ball: {fileID: 885994920}
-  speed: 10
-  jumpPower: 5
+  RigidBodyChar: {fileID: 885994920}
+  speed: 6
+  jumpPower: 4
   animator: {fileID: 885994916}
 --- !u!1 &1060826053
 GameObject:
