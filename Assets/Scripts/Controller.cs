@@ -16,7 +16,7 @@ public class Controller : MonoBehaviour {
    // private ray GroundIsHere;
     
     private CollisionDetectionMode2D TheGround;
-    float contacts = 0f;
+    int contacts = 0;
     
 
 
