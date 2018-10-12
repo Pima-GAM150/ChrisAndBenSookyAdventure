@@ -13,12 +13,10 @@ public class Controller : MonoBehaviour {
     public Animator animator;
     private Vector2 direction;
     private Vector3 offset;
-   // private ray GroundIsHere;
-    
-    private CollisionDetectionMode2D TheGround;
-    int contacts = 0;
-    
+    private int AirJumps;
 
+    private CollisionDetectionMode2D TheGround;
+    bool Grounded = false;
 
     private float buttonX;
     private bool buttonY;
@@ -37,46 +35,34 @@ public class Controller : MonoBehaviour {
 
     // Update is called once per frame
     void Update()
+
+    // Cast a ray down. If ray its hit distance is less than .05 it will allow jumping. els eit will not. 
     {
-
-       
-    	//GroundIsHere = new Ray(this.transform.position, vector3.down);
-    	RaycastHit2D hit = Physics2D.Raycast(Player.position- offset, Vector2.down);
-
-    //	if( hit.distance < .1f) {
-   // 		contacts = 1;
-  //  	}
-   // 	else{
-   // 		contacts = 0;
-   // 	}
-
-    	Debug.DrawRay(Player.position - offset, Vector2.down);
-    	if (hit.collider != null)
-            {
-            	if (hit.distance < .05f){
-                Debug.Log(hit.collider.name);
-             
-                contacts = 1;
+        RaycastHit2D hit = Physics2D.Raycast(Player.position - offset, Vector2.down);
+        if (hit.collider != null)
+        {
+            if (hit.distance < .05f) {
+                Grounded = true;
+                AirJumps = 0;
             }
         }
-                else{
-                	contacts = 0;
-                }
-            
-
-
+        else {
+            Grounded = false;
+        }
+        // variables for movement and animation
         buttonX = Input.GetAxis("Horizontal");
         buttonY = Input.GetButtonDown("Jump");
-        
-        if (buttonY){
-            if (Input.GetButtonDown("Jump"))
+
+        //press button down to jump. if no contacts then no jump
+        if (buttonY) {
+            if (Grounded || AirJumps < UpgradeManager.singleton.MaxNumberOfAirJumps)
             {
-                if (contacts > 0) Jump();
-               contacts = 0;
+                    Jump();
+                    Grounded = false;
             }
         }
         
-        
+        //animator for character
         animator.SetFloat("Hmove", buttonX);
 
         if (buttonX < 0f)
@@ -90,33 +76,17 @@ public class Controller : MonoBehaviour {
     }
 
     void FixedUpdate()
+        //speed of the character
     {
-        //Controllers constant speed with velocity
         RigidBodyChar.velocity = new Vector3(buttonX * speed, RigidBodyChar.velocity.y, 0f);
     }
     void Jump()
+        //jump of the character
     {
         RigidBodyChar.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
-    }
+        if( Grounded == false ) AirJumps++;
 
-   // void OnCollisionEnter2D(Collision2D col)
-   // {
-    //    if (col.gameObject.tag == "Floor")
-     //   {
-            
-     //       contacts = 1;
-     //   }
-    //    else
-    //    {
-            
-   //     }
-  //  }
-  //  void OnCollisionExit2D(Collision2D col)
-  //  {
-   //     if (col.gameObject.tag == "Floor")
-    //    {
-         //   contacts = 0;
-    //    }
-  //  }
+        Grounded = false;
+    }
 
 }
