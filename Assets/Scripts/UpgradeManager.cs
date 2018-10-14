@@ -6,6 +6,14 @@ public class UpgradeManager : MonoBehaviour {
 
     public static UpgradeManager singleton;
     public int MaxNumberOfAirJumps;
+    public float speed;
+    public float PlayerDamage;
+    public float jumpPower;
+    public float PlayerHealth;
+    public float PlayerArmor;
+    public float MaxPlayerHealth;
+    public float MaxPlayerArmor;
+    
 
 	// Use this for initialization
 	void Start () {

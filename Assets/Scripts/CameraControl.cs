@@ -9,7 +9,7 @@ public class CameraControl : MonoBehaviour {
     public Transform player;
     public Transform camera;
 
-    Vector3 camOffsetFromPlayer;
+    private Vector3 camOffsetFromPlayer;
 
     void Start()
     {
