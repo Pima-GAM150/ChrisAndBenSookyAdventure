@@ -12,11 +12,8 @@ public class Controller : MonoBehaviour {
     private Vector2 direction;
     private Vector3 offset;
     private int AirJumps;
-    
-
    	private CollisionDetectionMode2D TheGround;
     bool Grounded = false;
-
     private float buttonX;
     private bool buttonY;
    	private bool buttonZ;
@@ -28,23 +25,20 @@ public class Controller : MonoBehaviour {
         direction = direction.normalized;
      	TheGround = CollisionDetectionMode2D.Continuous;
         offset = new Vector3(0f,.5f,0f); 
-
     }
-
     // Update is called once per frame
     void Update(){
-
     	// variables for movement and animation
         buttonX = Input.GetAxis("Horizontal");
         buttonY = Input.GetButtonDown("Jump");
        	buttonZ = Input.GetButtonDown("Fire1");
 
+       	//Button press to attack, calls a function
    	if(buttonZ){
    		Attack();
    	}
 
-    // Cast a ray down. If ray its hit distance is less than .05 it will allow jumping. els eit will not. 
-    
+    // Cast a ray down. If ray its hit distance is less than .05 it will allow jumping. els eit will not.   
         RaycastHit2D hit = Physics2D.Raycast(Player.position - offset, Vector2.down);
         if (hit.collider != null)
         {
@@ -56,12 +50,10 @@ public class Controller : MonoBehaviour {
         else {
             Grounded = false;
         }
-        
-
+       
         //press button down to jump. if no contacts then no jump
-        if (buttonY) {
-            if (Grounded || AirJumps < UpgradeManager.singleton.MaxNumberOfAirJumps)
-            {
+        if (buttonY){
+            if (Grounded || AirJumps < UpgradeManager.singleton.MaxNumberOfAirJumps){
                     Jump();
                     Grounded = false;
             }
@@ -70,29 +62,25 @@ public class Controller : MonoBehaviour {
         //animator for character
         animator.SetFloat("Hmove", buttonX);
 
-        if (buttonX < 0f)
-        {
+        if (buttonX < 0f){
             Player.eulerAngles = new Vector3(0f, 180f, 0f);
         }
-        if (buttonX > 0f)
-        {
+        if (buttonX > 0f){
             Player.eulerAngles = new Vector3(0f, 0f, 0f);
         }
     }
 
     void FixedUpdate()
-        //speed of the character
-    {
-    	
+        {
+		//speed of the character
         RigidBodyChar.velocity = new Vector3(buttonX * UpgradeManager.singleton.speed, RigidBodyChar.velocity.y, 0f);
-   	 
     }
+
     void Jump()
         //jump of the character
     {
         RigidBodyChar.AddForce(Vector2.up * UpgradeManager.singleton.jumpPower, ForceMode2D.Impulse);
         if( Grounded == false ) AirJumps++;
-
         Grounded = false;
     }
     
@@ -101,13 +89,10 @@ public class Controller : MonoBehaviour {
     	if (Smash.collider != null)
         {
             if (Smash.distance < .8f) {
-                if( Smash.collider.tag == "Enemy" ){
+                if( Smash.collider.tag == "Enemy" ){ 	
                 	
                 }
-
             }
         }
     }
-
-
 }
