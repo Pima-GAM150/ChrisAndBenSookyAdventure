@@ -10,9 +10,8 @@ public class UpgradeManager : MonoBehaviour {
     public float PlayerDamage;
     public float jumpPower;
     public float PlayerHealth;
-    public float PlayerArmor;
     public float MaxPlayerHealth;
-    public float MaxPlayerArmor;
+    public int Gold; 
     
 
 	// Use this for initialization
