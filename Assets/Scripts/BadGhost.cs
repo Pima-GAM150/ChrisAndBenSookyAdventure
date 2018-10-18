@@ -25,6 +25,9 @@ public class BadGhost : Enemy {
             }	
          else{
          	transform.rotation = originalRotation;
-         }   
+         }
+         if (EnemyHealth <= 0){
+         	Death();
+         }
         }
 }
