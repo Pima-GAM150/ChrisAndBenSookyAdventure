@@ -8,8 +8,14 @@ public class Enemy : MonoBehaviour {
 	public float EnemyDamage;
 	public Rigidbody2D body;
 	public float SomeDamage;
+	public Transform Playertochase;
+	public float MoveSpeed;
+	
+
 
 	public void TakeDamage(){
 		EnemyHealth = EnemyHealth - SomeDamage;
 	}
+
+	
 }

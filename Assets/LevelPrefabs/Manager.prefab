@@ -51,10 +51,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b779d6661d11704c812fb0fccfe872d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxNumberOfAirJumps: 2
-  speed: 3
-  PlayerDamage: 0
-  jumpPower: 5
-  PlayerHealth: 10
-  MaxPlayerHealth: 0
-  Gold: 10
+  MaxNumberOfAirJumps: 0
+  speed: 2
+  PlayerDamage: 10
+  jumpPower: 2
+  PlayerHealth: 5
+  MaxPlayerHealth: 5
+  Gold: 100

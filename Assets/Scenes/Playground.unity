@@ -189,10 +189,10 @@ GameObject:
   - component: {fileID: 798010830}
   - component: {fileID: 798010829}
   - component: {fileID: 798010828}
-  - component: {fileID: 798010831}
   - component: {fileID: 798010832}
+  - component: {fileID: 798010831}
   m_Layer: 0
-  m_Name: New Sprite
+  m_Name: SpookyEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -213,6 +213,8 @@ MonoBehaviour:
   EnemyDamage: 0
   body: {fileID: 798010832}
   SomeDamage: 5
+  Playertochase: {fileID: 885994918}
+  MoveSpeed: 0
 --- !u!212 &798010829
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -266,7 +268,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 798010827}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.337, y: 0.51, z: -0.1}
+  m_LocalPosition: {x: 0.18, y: 1.2, z: -0.1}
   m_LocalScale: {x: 4.4241, y: 4.4241, z: 4.4241}
   m_Children: []
   m_Father: {fileID: 0}
@@ -284,7 +286,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.056334585}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0.049999997, y: 0.049999997, z: 0.049999997, w: 0.049999997}
     pivot: {x: 0.5, y: 0.5}
@@ -295,7 +297,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.16, y: 0.30293322}
+  m_Size: {x: 0.16, y: 0.16}
   m_EdgeRadius: 0
 --- !u!50 &798010832
 Rigidbody2D:
@@ -309,9 +311,9 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_LinearDrag: 1
+  m_AngularDrag: 0.1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -409,7 +411,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 885994915}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.4121295, y: 0.09, z: 0}
+  m_LocalPosition: {x: -2.2, y: 0.09, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -527,6 +529,11 @@ Prefab:
     - target: {fileID: 4737402369021314, guid: 489b33cf0b54db8409215ddc756f91fc, type: 2}
       propertyPath: m_RootOrder
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114570849610634206, guid: 489b33cf0b54db8409215ddc756f91fc,
+        type: 2}
+      propertyPath: jumpPower
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 489b33cf0b54db8409215ddc756f91fc, type: 2}
