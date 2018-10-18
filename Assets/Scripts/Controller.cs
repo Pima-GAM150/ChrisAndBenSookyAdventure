@@ -33,8 +33,8 @@ public class Controller : MonoBehaviour {
         buttonX = Input.GetAxis("Horizontal");
         buttonY = Input.GetButtonDown("Jump");
        	buttonZ = Input.GetButtonDown("Fire1");
-       	direction = transform.right;
-       	
+       	direction = Vector2.right;
+       	direction = direction.normalized;
 
 
        	//Button press to attack, calls a function
@@ -89,7 +89,7 @@ public class Controller : MonoBehaviour {
     }
     
     void Attack(){
-    	RaycastHit2D Smash = Physics2D.Raycast(Player.position, Vector2.right);
+    	RaycastHit2D Smash = Physics2D.Raycast(Player.position, direction);
     	if (Smash.collider != null)
         {
             if (Smash.distance < .8f) {
@@ -100,7 +100,7 @@ public class Controller : MonoBehaviour {
             		enemy.TakeDamage();
             		// (requires that the Enemy type has a method called TakeDamage that takes a float and that you have one to feed it)
 
-            		enemy.body.AddForce( direction * PushForce, ForceMode2D.Impulse );
+            		enemy.body.AddForce(direction * PushForce, ForceMode2D.Impulse );
             		// (requires that the Enemy type has a public Rigidbody2D called 'body' and that you've calculated a direction to push it in and an amount of force to push it by)
             	}
             }
