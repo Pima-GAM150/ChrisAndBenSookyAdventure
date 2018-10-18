@@ -12,6 +12,8 @@ public class Controller : MonoBehaviour {
     private Vector2 direction;
     private Vector3 offset;
     private int AirJumps;
+    private float PushForce = 2;
+    
    	private CollisionDetectionMode2D TheGround;
     bool Grounded = false;
     private float buttonX;
@@ -21,8 +23,7 @@ public class Controller : MonoBehaviour {
     void Start()
     {
         PlayerPrefs.SetInt("lastLevel", SceneManager.GetActiveScene().buildIndex);
-        direction = new Vector2(0f, 1f);
-        direction = direction.normalized;
+        
      	TheGround = CollisionDetectionMode2D.Continuous;
         offset = new Vector3(0f,.5f,0f); 
     }
@@ -32,6 +33,8 @@ public class Controller : MonoBehaviour {
         buttonX = Input.GetAxis("Horizontal");
         buttonY = Input.GetButtonDown("Jump");
        	buttonZ = Input.GetButtonDown("Fire1");
+       	
+
 
        	//Button press to attack, calls a function
    	if(buttonZ){
@@ -89,9 +92,16 @@ public class Controller : MonoBehaviour {
     	if (Smash.collider != null)
         {
             if (Smash.distance < .8f) {
-                if( Smash.collider.tag == "Enemy" ){ 	
-                	
-                }
+                // check if there is a script of type "Enemy" (or a type that inherits from Enemy) on the same game object as this collider
+            	Enemy enemy = Smash.collider.GetComponent<Enemy>();
+
+            	if( enemy ) { // if there is a script of type "Enemy" (and this includes anything that inherits from Enemy like BadGhost)
+            		enemy.TakeDamage();
+            		// (requires that the Enemy type has a method called TakeDamage that takes a float and that you have one to feed it)
+
+            		enemy.body.AddForce( Vector2.right * PushForce, ForceMode2D.Impulse );
+            		// (requires that the Enemy type has a public Rigidbody2D called 'body' and that you've calculated a direction to push it in and an amount of force to push it by)
+            	}
             }
         }
     }
