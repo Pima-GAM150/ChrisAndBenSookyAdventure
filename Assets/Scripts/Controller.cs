@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.SceneManagement;
 
 public class Controller : MonoBehaviour {
 
@@ -14,6 +15,8 @@ public class Controller : MonoBehaviour {
     private float PushForce = 2;
     private Vector2 localToWorldRight;
     public float PlayerHealth;
+    public string LevelToLoad;
+
     
    //	private CollisionDetectionMode2D TheGround;
     private bool Grounded = false;
@@ -34,7 +37,9 @@ public class Controller : MonoBehaviour {
         buttonY = Input.GetButtonDown("Jump");
        	buttonZ = Input.GetButtonDown("Fire1");
        	localToWorldRight = (Vector2)transform.right;
-
+        if ( PlayerHealth <= 0f){
+            SceneManager.LoadScene(LevelToLoad);
+        }
 
        	//Button press to attack, calls a function
    	if(buttonZ){
