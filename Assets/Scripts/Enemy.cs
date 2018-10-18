@@ -20,5 +20,6 @@ public class Enemy : MonoBehaviour {
 	public void Death(){
 		Destroy(self);
 	}
+	
 
 }

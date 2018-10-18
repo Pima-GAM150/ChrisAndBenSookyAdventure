@@ -15,7 +15,7 @@ public class BadGhost : Enemy {
 	
 	// Update is called once per frame
 	void Update(){
-		     
+
 		distBetween = Vector3.Distance(Playertochase.position, transform.position);
 
 		if(distBetween < 5f){
@@ -29,5 +29,6 @@ public class BadGhost : Enemy {
          if (EnemyHealth <= 0){
          	Death();
          }
-        }
+       	}
+   	 	
 }
