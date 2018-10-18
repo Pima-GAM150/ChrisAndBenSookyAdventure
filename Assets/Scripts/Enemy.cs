@@ -10,12 +10,16 @@ public class Enemy : MonoBehaviour {
 	public float SomeDamage;
 	public Transform Playertochase;
 	public float MoveSpeed;
-	
+	public GameObject self;
 
 
 	public void TakeDamage(){
 		EnemyHealth = EnemyHealth - SomeDamage;
 	}
 
+	public void Death(){
+		Destroy(self);
+	}
 	
+
 }

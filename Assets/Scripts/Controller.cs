@@ -9,23 +9,23 @@ public class Controller : MonoBehaviour {
     public BoxCollider2D Mycollidor;
     public Rigidbody2D RigidBodyChar;
     public Animator animator;
-    private Vector2 direction;
     private Vector3 offset;
     private int AirJumps;
     private float PushForce = 2;
+    private Vector2 localToWorldRight;
+    public float PlayerHealth;
     
-   	private CollisionDetectionMode2D TheGround;
-    bool Grounded = false;
+   //	private CollisionDetectionMode2D TheGround;
+    private bool Grounded = false;
     private float buttonX;
     private bool buttonY;
    	private bool buttonZ;
     // Use this for initialization
     void Start()
-    {
-        PlayerPrefs.SetInt("lastLevel", SceneManager.GetActiveScene().buildIndex);
-        
-     	TheGround = CollisionDetectionMode2D.Continuous;
+    {   
+     //	TheGround = CollisionDetectionMode2D.Continuous;
         offset = new Vector3(0f,.5f,0f); 
+        PlayerHealth = UpgradeManager.singleton.MaxPlayerHealth;
     }
     // Update is called once per frame
     void Update(){
@@ -33,13 +33,15 @@ public class Controller : MonoBehaviour {
         buttonX = Input.GetAxis("Horizontal");
         buttonY = Input.GetButtonDown("Jump");
        	buttonZ = Input.GetButtonDown("Fire1");
-       	direction = Vector2.right;
-       	direction = direction.normalized;
+       	localToWorldRight = (Vector2)transform.right;
 
 
        	//Button press to attack, calls a function
    	if(buttonZ){
    		Attack();
+   	}
+   	else {
+   		animator.SetBool("Hitting", false);
    	}
 
     // Cast a ray down. If ray its hit distance is less than .05 it will allow jumping. els eit will not.   
@@ -89,10 +91,11 @@ public class Controller : MonoBehaviour {
     }
     
     void Attack(){
-    	RaycastHit2D Smash = Physics2D.Raycast(Player.position, direction);
+    	animator.SetBool("Hitting", true);
+    	RaycastHit2D Smash = Physics2D.Raycast(Player.position, localToWorldRight);
     	if (Smash.collider != null)
         {
-            if (Smash.distance < .8f) {
+            if (Smash.distance < .7f) {
                 // check if there is a script of type "Enemy" (or a type that inherits from Enemy) on the same game object as this collider
             	Enemy enemy = Smash.collider.GetComponent<Enemy>();
 
@@ -100,10 +103,22 @@ public class Controller : MonoBehaviour {
             		enemy.TakeDamage();
             		// (requires that the Enemy type has a method called TakeDamage that takes a float and that you have one to feed it)
 
-            		enemy.body.AddForce(direction * PushForce, ForceMode2D.Impulse );
+            		enemy.body.AddForce(localToWorldRight * PushForce, ForceMode2D.Impulse );
             		// (requires that the Enemy type has a public Rigidbody2D called 'body' and that you've calculated a direction to push it in and an amount of force to push it by)
             	}
             }
+        }
+    }
+    void OnCollisionEnter2D(Collision2D Touch)
+    {
+        if (Touch.gameObject.tag == "Enemy")
+        {
+            
+            PlayerHealth--;
+        }
+        else
+        {
+            
         }
     }
 }

@@ -9,7 +9,6 @@ public class UpgradeManager : MonoBehaviour {
     public float speed;
     public float PlayerDamage;
     public float jumpPower;
-    public float PlayerHealth;
     public float MaxPlayerHealth;
     public int Gold; 
     
