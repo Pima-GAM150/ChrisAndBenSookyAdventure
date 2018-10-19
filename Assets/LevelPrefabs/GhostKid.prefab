@@ -121,7 +121,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1
   player: {fileID: 4158030700794378}
-  camera: {fileID: 0}
+  camera: {fileID: 4461319565347740, guid: 5b9ce1dff2dd7bd439578522ba379541, type: 2}
 --- !u!114 &114887617378641844
 MonoBehaviour:
   m_ObjectHideFlags: 1
