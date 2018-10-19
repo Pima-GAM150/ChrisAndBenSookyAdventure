@@ -844,7 +844,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d548236db9553424a8e31d70a92de71d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LevelToLoad: Playground
+  LevelToLoad: OutsideMansion
 --- !u!1 &366846974
 GameObject:
   m_ObjectHideFlags: 0
